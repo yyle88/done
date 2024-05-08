@@ -28,12 +28,12 @@ so why not just panic when an error occurs(especially in small informal projects
 
 so this utils can help some developers to override/rush/skip/ignore this problem.
 ```
-res := done.VE(xxx()).Nice()
-val := done.VE(yyy(res)).Nice()
+res := done.VCE(xxx()).Nice()
+val := done.VCE(yyy(res)).Nice()
 ```
 so it can write in one line.
 ```
-val := done.VE(yyy(done.VE(xxx()).Nice())).Nice()
+val := done.VCE(yyy(done.VCE(xxx()).Nice())).Nice()
 ```
 a ha ha ha! a genius design.
 
