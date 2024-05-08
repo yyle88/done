@@ -38,17 +38,25 @@ val := done.VE(yyy(done.VE(xxx()).Nice())).Nice()
 a ha ha ha! a genius design.
 
 code:
+```
 ve means check res, err and the result is an interface{}/any type.
 vae means check res, err and the result is an array/slice type.
 vbe means check res, err and the result is a bool type.
 vce means check res, err and the result is a comparable type.
 vse TODO. means string.
 vne TODO. means num.
+```
 
 func:
+```
 Done means when param is (res, err) it only check if err is nil(logic is if err != nil {panic}), means success.
 Sure/Nice/Some means error is nil and the result is not zero value(0/""/false/nil object/empty slice) and then return the res.
 Good/Fine/Safe means error is nil and the result is not zero. only check. not return.
 Zero/None/Void means error is nil and the result is zero value.
+```
 
-使用几个同义词的目的是，这样开发者就可以根据自己的爱好自由选择，而几乎所有的单词都是四个字母的，也是为了让代码更简洁(其实是强迫症在作祟)，但最终还是没能完全只用四个字母的单词（破功啦）。
+使用几个同义词的目的是，这样开发者就可以根据自己的爱好自由选择，而几乎所有的单词都是四个字母的.
+
+当然也是为了让代码更简洁(其实是强迫症在作祟)，但最终还是没能完全只用四个字母的单词（破功啦）。
+
+Give me stars. thank you.
