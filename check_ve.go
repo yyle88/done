@@ -6,7 +6,10 @@ type Ve[V any] struct {
 }
 
 func VE[V any](val V, err error) *Ve[V] {
-	return &Ve[V]{V: val, E: err}
+	return &Ve[V]{
+		V: val,
+		E: err,
+	}
 }
 
 func (a *Ve[V]) Done() V {

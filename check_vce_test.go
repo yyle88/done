@@ -25,13 +25,17 @@ func TestVe_Nice(t *testing.T) {
 
 func TestVe_Zero(t *testing.T) {
 	VCE(newFalse()).Zero()
-	VCE(newInt64()).Zero()
+	VCE(newInt64(0)).Zero()
 }
 
 func newFalse() (bool, error) {
 	return false, nil
 }
 
-func newInt64() (int64, error) {
-	return 0, nil
+func newInt64(v int64) (int64, error) {
+	return v, nil
+}
+
+func newUint64(v uint64) (uint64, error) {
+	return v, nil
 }

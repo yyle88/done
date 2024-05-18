@@ -9,7 +9,11 @@ type Vbe struct {
 }
 
 func VBE(val bool, err error) *Vbe {
-	return &Vbe{V: val, E: err, Vce: VCE[bool](val, err)}
+	return &Vbe{
+		V:   val,
+		E:   err,
+		Vce: VCE[bool](val, err),
+	}
 }
 
 func (a *Vbe) TRUE() {

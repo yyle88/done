@@ -9,7 +9,11 @@ type Vae[V any] struct {
 }
 
 func VAE[V any](val []V, err error) *Vae[V] {
-	return &Vae[V]{V: val, E: err, Ve: VE[[]V](val, err)}
+	return &Vae[V]{
+		V:  val,
+		E:  err,
+		Ve: VE[[]V](val, err),
+	}
 }
 
 func (a *Vae[V]) Sure() []V {

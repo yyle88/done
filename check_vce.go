@@ -9,7 +9,11 @@ type Vce[V comparable] struct {
 }
 
 func VCE[V comparable](val V, err error) *Vce[V] {
-	return &Vce[V]{V: val, E: err, Ve: VE[V](val, err)}
+	return &Vce[V]{
+		V:  val,
+		E:  err,
+		Ve: VE[V](val, err),
+	}
 }
 
 func (a *Vce[V]) Sure() V {
@@ -47,6 +51,25 @@ func (a *Vce[V]) Same(v V) {
 }
 
 func (a *Vce[V]) Diff(v V) {
+	if x := a.Done(); x == v {
+		panic(errors.New("SHOULD BE DIFFERENT BUT IS SAME"))
+	}
+}
+
+func (a *Vce[V]) Is(v V) {
+	if x := a.Done(); x != v {
+		panic(errors.New("SHOULD BE SAME BUT IS DIFFERENT"))
+	}
+}
+
+func (a *Vce[V]) Equals(v V) {
+	if x := a.Done(); x != v {
+		panic(errors.New("SHOULD BE SAME BUT IS DIFFERENT"))
+	}
+}
+
+// Different 这个单词这么长真是万恶啊
+func (a *Vce[V]) Different(v V) {
 	if x := a.Done(); x == v {
 		panic(errors.New("SHOULD BE DIFFERENT BUT IS SAME"))
 	}

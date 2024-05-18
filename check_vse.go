@@ -14,7 +14,11 @@ type Vse struct {
 }
 
 func VSE(val string, err error) *Vse {
-	return &Vse{V: val, E: err, Vce: VCE[string](val, err)}
+	return &Vse{
+		V:   val,
+		E:   err,
+		Vce: VCE[string](val, err),
+	}
 }
 
 func (a *Vse) Equals(s string) {
