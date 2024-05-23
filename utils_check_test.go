@@ -14,17 +14,17 @@ func TestDone(t *testing.T) {
 
 func TestMust(t *testing.T) {
 	if false {
-		Must(errors.New("wrong"), "message")
+		Must(errors.New("wrong"))
 	}
 }
 
 func TestSoft(t *testing.T) {
-	Soft(errors.New("wrong"), "message")
+	Soft(errors.New("wrong"))
 }
 
 func TestFata(t *testing.T) {
 	if false {
-		Fata(errors.New("123"), "message")
+		Fata(errors.New("123"))
 	}
 }
 
