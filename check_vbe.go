@@ -28,6 +28,14 @@ func (a *Vbe) Yes() {
 	a.assert1T1(a.Done())
 }
 
+func (a *Vbe) YES() {
+	a.assert1T1(a.Done())
+}
+
+func (a *Vbe) NO() {
+	a.assert0F0(a.Done())
+}
+
 func (a *Vbe) No() {
 	a.assert0F0(a.Done())
 }

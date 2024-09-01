@@ -5,6 +5,7 @@ type Ve[V any] struct {
 	E error
 }
 
+// VE accept two params. one is any and one is error interface
 func VE[V any](val V, err error) *Ve[V] {
 	return &Ve[V]{
 		V: val,
@@ -14,7 +15,7 @@ func VE[V any](val V, err error) *Ve[V] {
 
 func (a *Ve[V]) Done() V {
 	Done(a.E)  //只会检查错误，而不检查结果
-	return a.V //结果不做检查，允许返回零值
+	return a.V //结果不做检查，允许返回零值，因为不是 comparable 的这里也没法比较是否为零值
 }
 
 func (a *Ve[V]) Must() V {

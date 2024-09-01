@@ -27,6 +27,6 @@ type Example struct {
 	S string
 }
 
-func NewExample() (*Example, error) {
+func newExample2x() (*Example, error) {
 	return &Example{S: "xyz"}, nil
 }

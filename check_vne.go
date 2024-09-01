@@ -20,34 +20,34 @@ func VNE[V numType](val V, err error) *Vne[V] {
 	}
 }
 
-func (a *Vne[V]) Gt(arg V) V {
-	if x := a.Done(); x > arg {
+func (a *Vne[V]) Gt(base V) V {
+	if x := a.Done(); x > base {
 		return x
 	} else {
-		panic(errors.Errorf("SHOULD BE x > arg BUT NOT. x=%v arg=%v", x, arg))
+		panic(errors.Errorf("SHOULD BE x > BASE BUT NOT. x=%v BASE=%v", x, base))
 	}
 }
 
-func (a *Vne[V]) Lt(arg V) V {
-	if x := a.Done(); x < arg {
+func (a *Vne[V]) Lt(base V) V {
+	if x := a.Done(); x < base {
 		return x
 	} else {
-		panic(errors.Errorf("SHOULD BE x < arg BUT NOT. x=%v arg=%v", x, arg))
+		panic(errors.Errorf("SHOULD BE x < BASE BUT NOT. x=%v BASE=%v", x, base))
 	}
 }
 
-func (a *Vne[V]) Gte(arg V) V {
-	if x := a.Done(); x >= arg {
+func (a *Vne[V]) Gte(base V) V {
+	if x := a.Done(); x >= base {
 		return x
 	} else {
-		panic(errors.Errorf("SHOULD BE x >= arg BUT NOT. x=%v arg=%v", x, arg))
+		panic(errors.Errorf("SHOULD BE x >= BASE BUT NOT. x=%v BASE=%v", x, base))
 	}
 }
 
-func (a *Vne[V]) Lte(arg V) V {
-	if x := a.Done(); x <= arg {
+func (a *Vne[V]) Lte(base V) V {
+	if x := a.Done(); x <= base {
 		return x
 	} else {
-		panic(errors.Errorf("SHOULD BE x <= arg BUT NOT. x=%v arg=%v", x, arg))
+		panic(errors.Errorf("SHOULD BE x <= BASE BUT NOT. x=%v BASE=%v", x, base))
 	}
 }

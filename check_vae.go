@@ -8,6 +8,8 @@ type Vae[V any] struct {
 	*Ve[[]V]
 }
 
+// VAE accept two params. one is slice and one is error interface
+// So A means Array type.
 func VAE[V any](val []V, err error) *Vae[V] {
 	return &Vae[V]{
 		V:  val,

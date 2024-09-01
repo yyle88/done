@@ -8,6 +8,7 @@ type Vce[V comparable] struct {
 	*Ve[V]
 }
 
+// VCE accept two params. one is comparable and one is error interface
 func VCE[V comparable](val V, err error) *Vce[V] {
 	return &Vce[V]{
 		V:  val,

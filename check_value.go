@@ -2,6 +2,7 @@ package done
 
 import "github.com/pkg/errors"
 
+// Sure means the value is not zero value, then return value
 func Sure[V comparable](v V) V {
 	var zero V
 	if !(v != zero) {
@@ -10,6 +11,7 @@ func Sure[V comparable](v V) V {
 	return v
 }
 
+// Nice means the value is not zero value, then return value
 func Nice[V comparable](v V) V {
 	var zero V
 	if !(v != zero) {
@@ -18,6 +20,7 @@ func Nice[V comparable](v V) V {
 	return v
 }
 
+// Good means the value is not zero value, then return value
 func Good[V comparable](v V) {
 	var zero V
 	if !(v != zero) {
@@ -25,6 +28,7 @@ func Good[V comparable](v V) {
 	}
 }
 
+// Fine means the value is not zero value
 func Fine[V comparable](v V) {
 	var zero V
 	if !(v != zero) {
@@ -32,6 +36,7 @@ func Fine[V comparable](v V) {
 	}
 }
 
+// Safe means the value is not zero value
 func Safe[V comparable](v V) {
 	var zero V
 	if !(v != zero) {
@@ -39,6 +44,7 @@ func Safe[V comparable](v V) {
 	}
 }
 
+// Zero means the value is a zero value, num is 0, string is "", PTR is none.
 func Zero[V comparable](v V) {
 	var zero V
 	if !(v == zero) {
@@ -46,6 +52,7 @@ func Zero[V comparable](v V) {
 	}
 }
 
+// None means the value is a zero value
 func None[V comparable](v V) {
 	var zero V
 	if !(v == zero) {
