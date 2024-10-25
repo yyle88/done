@@ -3,9 +3,17 @@ package done
 import "testing"
 
 func TestVBE_OK(t *testing.T) {
-	VBE(newExample1x(true)).OK()
+	run := func() (bool, error) {
+		return true, nil
+	}
+
+	VBE(run()).OK()
 }
 
 func TestVBE_NO(t *testing.T) {
-	VBE(newExample1x(false)).NO()
+	run := func() (bool, error) {
+		return false, nil
+	}
+
+	VBE(run()).NO()
 }
