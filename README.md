@@ -37,6 +37,33 @@ This package introduces several types and functions that make error handling mor
 
 ### Example Usage
 
+Here is an example code:
+
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/yyle88/done"
+)
+
+func main() {
+	xyz, err := NewXyz()
+	if err != nil {
+		panic(err) // Handle errors manually / 手动处理错误
+	}
+	abc, err := xyz.Abc()
+	if err != nil {
+		panic(err)
+	}
+	uvw, err := abc.Uvw()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(uvw.Message)
+}
+```
+
 Here is how you would use the package to handle errors in a typical Go application:
 
 ```go
@@ -48,22 +75,68 @@ import (
 )
 
 func main() {
-    cli := done.VCE(xxx.NewXx()).Nice()
-    res := done.VCE(cli.Abc()).Nice()
-    xyz := done.VCE(res.Xyz).Nice()
-    fmt.Println(xyz)
+	xyz := done.VCE(NewXyz()).Nice()
+	abc := done.VCE(xyz.Abc()).Nice()
+	uvw := done.VCE(abc.Uvw()).Nice()
+	fmt.Println(uvw.Message)
 }
 ```
+
+See [demo1](internal/demos/demo1/main.go)
 
 In this example, the errors are checked and handled inline, allowing you to chain function calls without cluttering the code with repetitive error checks.
 
 ### Chaining Operations
 
+Here is an example code:
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/pkg/errors"
+	"github.com/yyle88/done"
+)
+
+func main() {
+	snu, err := fetch()
+	if err != nil {
+		panic(err) // Handle error manually / 手动处理错误
+	}
+	num, err := toInt(snu)
+	if err != nil {
+		panic(err)
+	}
+	if !(num > 0) {
+		panic(errors.New("num is not > 0"))
+	}
+	fmt.Println(num)
+}
+```
+
 You can chain multiple function calls with error handling assertions in a single line:
 
 ```go
-num := done.VCE(yyy(done.VCE(xxx()).Nice())).Gt(0)
+package main
+
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/pkg/errors"
+	"github.com/yyle88/done"
+)
+
+func main() {
+	num := done.VNE(   toInt(   done.VCE(fetch()).Nice()   )   ).Gt(0)
+	fmt.Println(num)
+}
 ```
+
+See [demo2](internal/demos/demo2/main.go)
 
 This way, you can check if the error exists at each step and continue with the result without writing long error-handling logic.
 
@@ -98,9 +171,9 @@ The utility functions provided by **Done** are based on different approaches to 
 
 In cases where you need more complex logic, such as comparing values or checking conditions, you can use the following functions:
 
-- **Vce (Comparable Errors)**: Check if two comparable values are the same or different using `Same`, `Diff`, `Is`, and `Equals`.
-- **Vse (String Errors)**: Check if a string matches conditions like `HasPrefix`, `HasSuffix`, or `Contains`.
-- **Vne (Numerical Errors)**: Check if a numeric value meets conditions like `Gt`, `Lt`, `Gte`, or `Lte`.
+- **Vce (Comparable + Errors)**: Check if two comparable values are the same or different using `Same`, `Diff`, `Is`, and `Equals`.
+- **Vse (String + Errors)**: Check if a string matches conditions like `HasPrefix`, `HasSuffix`, or `Contains`.
+- **Vne (Numerical + Errors)**: Check if a numeric value meets conditions like `Gt`, `Lt`, `Gte`, or `Lte`.
 
 ## Conclusion
 

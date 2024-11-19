@@ -3,7 +3,7 @@ package name "done" means function() return success. also means "assert".
 
 most of the time we write a go code, we need to handle the error return value.
 
-it wastes a lot of time and code lines. 
+while the error handling logic wastes a lot of time and code lines. 
 
 ```
 res, err := xxx()
