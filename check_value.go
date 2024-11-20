@@ -59,3 +59,15 @@ func None[V comparable](v V) {
 		panic(errors.New("SHOULD BE NONE BUT NOT NONE"))
 	}
 }
+
+func Null[V *any](v any) {
+	if v != nil {
+		panic(errors.New("SHOULD BE NULL BUT IS FULL"))
+	}
+}
+
+func Full[V *any](v any) {
+	if v == nil {
+		panic(errors.New("SHOULD BE FULL BUT IS NULL"))
+	}
+}

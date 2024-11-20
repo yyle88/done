@@ -42,3 +42,11 @@ func (a *Vpe[V]) Zero() {
 func (a *Vpe[V]) None() {
 	None(a.Done())
 }
+
+func (a *Vpe[V]) Null() {
+	Null(a.Done())
+}
+
+func (a *Vpe[V]) Full() {
+	Full(a.Done())
+}
