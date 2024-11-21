@@ -140,33 +140,34 @@ See [demo2](internal/demos/demo2/main.go)
 
 This way, you can check if the error exists at each step and continue with the result without writing long error-handling logic.
 
-### Example Usage
+### Example NPC
 
-This section demonstrates how you can simplify error handling and result validation using the `done` package. By using `done.P1`, `done.P2`, and `done.P3`, you can reduce the complexity of your error checks and nil checks, making your code more readable.
+This section demonstrates how you can simplify error handling and result validation using the `done` package.
 
-#### Example 1: Checking Results from `run1()`
+By using `done.V1`, `done.P2`, and `done.C3`, you can reduce the complexity of your error checks and nil checks, making your code more readable.
 
-Before using `done.P1`, we would have to manually check the error and handle nil values for the result:
+#### Example NPC 1 (nv): Checking Results from `run1()`
+
+Before using `done.V1`, we would have to manually check the error and handle nil values for the result:
 
 ```go
 a, err := run1()
 if err != nil {
     panic(err) // If an error occurs, trigger a panic
 }
-if a == nil {
-    panic("a is nil") // If 'a' is nil, trigger panic
-}
 fmt.Println(a) // Output the result
 ```
 
-With `done.P1`, you can perform the same checks in a cleaner, more concise way:
+With `done.V1`, you can perform the same checks in a cleaner, more concise way:
 
 ```go
-a := done.P1(run1()) // done.P1 handles error checking and nil validation
+a := done.V1(run1()) // done.V1 handles error checking
 fmt.Println(a) // Output the result
 ```
 
-#### Example 2: Handling Multiple Results from `run2()`
+see [code](nv.go) see [case](nv_test.go)
+
+#### Example NPC 2 (np): Handling Multiple Results from `run2()`
 
 For functions that return multiple values, such as `run2()`, you can use a similar approach:
 
@@ -187,11 +188,13 @@ fmt.Println(a, b) // Output both 'a' and 'b'
 With `done.P2`, the error handling and nil checks are simplified:
 
 ```go
-a, b := done.P2(run2()) // done.P2 simplifies error checking and validation
+a, b := done.P2(run2()) // done.P2 simplifies error checking and nil validation
 fmt.Println(a, b) // Output both 'a' and 'b'
 ```
 
-#### Example 3: Handling Multiple Results from `run3()`
+see [code](np.go) see [case](np_test.go)
+
+#### Example NPC 3 (nc): Handling Multiple Results from `run3()`
 
 For functions that return even more values, like `run3()`, you can extend this pattern:
 
@@ -200,33 +203,39 @@ a, b, c, err := run3()
 if err != nil {
     panic(err) // If an error occurs, trigger a panic
 }
-if a == nil {
-    panic("a is nil") // If 'a' is nil, trigger panic
+if a == 0 {
+    panic("a is zero") // If 'a' is zero, trigger panic
 }
-if b == nil {
-    panic("b is nil") // If 'b' is nil, trigger panic
+if b == "" {
+    panic("b is zero") // If 'b' is zero, trigger panic
 }
-if c == nil {
-    panic("c is nil") // If 'c' is nil, trigger panic
+if c == zero {
+    panic("c is zero") // If 'c' is zero, trigger panic
 }
 fmt.Println(a, b, c) // Output 'a', 'b', and 'c'
 ```
 
-Using `done.P3` simplifies error handling and validation for multiple results:
+Using `done.C3` simplifies error handling and validation for multiple results:
 
 ```go
-a, b, c := done.P3(run3()) // done.P3 simplifies error checking and validation
+a, b, c := done.C3(run3()) // done.C3 simplifies error checking and no-zero validation
 fmt.Println(a, b, c) // Output 'a', 'b', and 'c'
 ```
+
+see [code](nc.go) see [case](nc_test.go)
 
 See [demo3](internal/demos/demo3/main.go)
 
 This way you can avoid checking whether the return value has errors or null values, which is very convenient.
 
 There are also these methods that can provide additional convenience.
+
 `done.P1() - done.P9()`
+
 `done.C1() - done.C9()`
+
 `done.V1() - done.V9()`
+
 This avoids always checking if there are errors in the return values.
 
 ## Usage Scenarios

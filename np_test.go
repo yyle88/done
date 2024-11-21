@@ -8,7 +8,11 @@ import (
 )
 
 func TestP0(t *testing.T) {
-	done.P0(error(nil))
+	run := func() error {
+		return nil
+	}
+
+	done.P0(run())
 }
 
 func TestP1(t *testing.T) {
