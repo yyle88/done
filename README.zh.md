@@ -1,79 +1,212 @@
-# done
-package name "done" means function() return success. also means "assert".
+# Done - 简化 Go 中的错误处理
 
-most of the time we write a go code, we need to handle the error return value.
+**Done** 让你摆脱重复的 `if err != nil` 模式，更专注于业务逻辑。
 
-while the error handling logic wastes a lot of time and code lines. 
+当你写如下逻辑时：
 
-```
-res, err := xxx()
-if err != nil {
-	fatal(...)
+```go
+if err := run(); err != nil {
+panic(err)
 }
-if res == wrong-value {
-	panic(...)
+```
+
+使用 Done 简化为：
+
+```go
+done.Done(run())
+```
+
+## 英文文档
+
+[English README](README.md)
+
+---
+
+## 特性
+
+- **简单的错误处理**：快速处理错误，使用简单的函数。
+- **支持多个返回值**：适用于返回值和错误类型的函数。
+- **减少重复的代码**：用简洁明了的函数代替重复的错误检查。
+
+---
+
+## 安装
+
+```bash
+go get github.com/yyle88/done
+```
+
+---
+
+## 工作原理
+
+**Done** 包将错误检查封装为易用的断言工具，帮助你专注于代码的成功路径，而不是错误处理的细节。
+
+---
+
+## 核心类型
+
+| 类型                      | 描述                                        |
+|-------------------------|-------------------------------------------|
+| **`Ve[V any]`**         | 包含一个值和一个错误，提供 `Done`、`Must` 和 `Soft` 等操作。 |
+| **`Vpe[V any]`**        | 处理指针值，包含 `Sure`、`Nice` 和 `Good` 等操作。      |
+| **`Vce[V comparable]`** | 用于可比较值，提供 `Same`、`Diff` 和 `Equals` 等操作。   |
+
+---
+
+## 核心函数
+
+| 函数         | 描述                 |
+|------------|--------------------|
+| **`Done`** | 如果存在错误则触发 panic。   |
+| **`Must`** | 确保错误为 nil 并返回值。    |
+| **`Soft`** | 记录警告错误，但不触发 panic。 |
+| **`Fata`** | 记录错误日志并触发 panic。   |
+
+---
+
+## 功能概览
+
+| 类别       | 函数                     | 描述                    |
+|----------|------------------------|-----------------------|
+| **错误处理** | `Done`, `Must`, `Soft` | 对错误进行 panic 或特定方式的处理。 |
+| **结果验证** | `Sure`, `Nice`, `Some` | 确保结果非零值并返回。           |
+| **结果验证** | `Good`, `Fine`, `Safe` | 确保结果非零值但不返回结果。        |
+| **零值检查** | `Zero`, `None`, `Void` | 确保结果为其类型的零值。          |
+| **量值比较** | `Same`, `Diff`, `Is`   | 检查值是否相同、不同或符合特定条件。    |
+
+---
+
+## 高级错误处理
+
+| 工具        | 描述                                                   |
+|-----------|------------------------------------------------------|
+| **`Vce`** | 针对可比较值，提供 `Same`、`Diff`、`Is` 和 `Equals` 等方法。         |
+| **`Vse`** | 针对字符串操作，提供 `HasPrefix`、`HasSuffix` 和 `Contains` 等方法。 |
+| **`Vne`** | 针对数字操作，提供 `Gt`（大于）、`Lt`（小于）等方法。                      |
+
+---
+
+## 示例用法
+
+### 标准错误处理
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	xyz, err := NewXyz()
+	if err != nil {
+		panic(err) // 手动处理错误
+	}
+	abc, err := xyz.Abc()
+	if err != nil {
+		panic(err)
+	}
+	uvw, err := abc.Uvw()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(uvw.Message)
 }
-// next logic
-num, err := yyy(res) //use the res as an arg to call this function
-if err != nil {
-	fatal(...)
+```
+
+### 使用 Done
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/yyle88/done"
+)
+
+func main() {
+	xyz := done.VCE(NewXyz()).Nice()
+	abc := done.VCE(xyz.Abc()).Nice()
+	uvw := done.VCE(abc.Uvw()).Nice()
+	fmt.Println(uvw.Message)
 }
-if num <= 0 {
-	panic(...)
+```
+
+这种方法通过链式调用简化了代码，同时结合错误处理断言，使代码更简洁、易读。
+
+---
+
+## 链式操作
+
+### 不使用 Done
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/pkg/errors"
+)
+
+func main() {
+	stringNum, err := fetch()
+	if err != nil {
+		panic(err)
+	}
+	num, err := toInt(stringNum)
+	if err != nil {
+		panic(err)
+	}
+	if num <= 0 {
+		panic(errors.New("num <= 0"))
+	}
+	fmt.Println(num)
 }
-// then use the num in next logic
 ```
 
-so why not just panic when an error occurs(especially in small informal projects).
+### 使用 Done
 
-so this utils can help some developers to override/rush/skip/ignore this problem.
-```
-res := done.VCE(xxx()).Nice()
-num := done.VCE(yyy(res)).Gt(0)
-// then use the num in next logic
-```
-so it can write in one line.
-```
-num := done.VCE(  yyy(  done.VCE(xxx()).Nice()  )  ).Gt(0)
-// then use the num in next logic
-```
-a ha ha ha! a genius design.
+```go
+package main
 
-这个包的主要功能就是断言 "assert"， 让你在99.99%不会出错的地方直接用个断言代替 err != nil 的错误处理，而且对于返回 res, err 两个返回值的函数非常有效。
+import (
+	"fmt"
+	"strconv"
 
-通常我们调用第三方包时，往往就是 `cli, err := xx.NewXx()` 接下来判断没有错误，在调用 `res, err:= cli.Abc()` 的操作，接下来使用 `res.Xyz` 获得信息，但这个函数依然可能是会返回个错误的，毕竟根据go的标准，或者说习惯，err都是一层一层向外返回的。
+	"github.com/yyle88/done"
+)
 
-我当然知道我们开发代码需要遵守规范，但是，在某些非正式的场景里，我们确实希望代码能尽量短些我们就可以使用
-```
-cli := done.VCE( xx.NewXx() ).Nice()
-xyz := done.VCE( cli.Abc() ).Nice().Xyz
-```
-这样确实是能带来极大的便利。
-
-活学活用，别太死板，而且像 gin 和 kratos 框架在 HandleFunc 和 service 层面通常都是有 recover middleware 的，在几乎不可能出错的地方用断言也没啥问题。
-
-该 panic 就 panic 吧。
-
-code:
-```
-v_e means check res, err and the result, check with some interface{}/any logic.
-vae means check res, err and the result, check with array/slice logic.
-vbe means check res, err and the result, check with bool logic.
-vce means check res, err and the result, some comparable logic.
-vse means check res, err and the result, some function: HasPrefix HasSuffix Contains
-vne means check res, err and the result, some function: Gt Lt Gte Lte
+func main() {
+	num := done.VNE(toInt(done.VCE(fetch()).Nice())).Gt(0)
+	fmt.Println(num)
+}
 ```
 
-common function:
-```
-Done means when param is (res, err) it only check if err is nil(logic is if err != nil {panic}), means success.
-Sure/Nice/Some means error is nil and the result is not zero value(0/""/false/nil object/empty slice) and then return the res.
-Good/Fine/Safe means error is nil and the result is not zero. only check. not return.
-Zero/None/Void means error is nil and the result is zero value.
-```
+通过 **Done**，你可以消除重复的错误检查，用内联断言实现条件校验，使代码更整洁、可维护。
 
-使用几个同义词的目的是，这样开发者就可以根据自己的爱好自由选择，而几乎所有的单词都是四个字母的.
+---
 
-当然也是为了让代码更简洁(其实是强迫症在作祟)，但最终还是没能完全只用四个字母的单词（破功啦）。
+## 总结
 
-Give me stars. thank you!!!
+**Done** 包是一个强大的工具，可以简化错误处理，特别适用于非正式或小型项目。它减少了模板代码的重复，使错误处理更简洁，让你专注于编写清晰高效的业务逻辑。
+
+**试试看并分享你的反馈吧！**
+
+---
+
+## 许可证
+
+此项目基于 MIT 许可证。详细信息请参阅 [LICENSE](LICENSE) 文件。
+
+---
+
+## 贡献与支持
+
+欢迎通过提交拉取请求或报告问题来为此项目做出贡献。
+
+如果你觉得这个包有用，请在 GitHub 上给个星！
+
+**感谢你的支持！**

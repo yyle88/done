@@ -27,9 +27,3 @@ func TestFata(t *testing.T) {
 		Fata(errors.New("123"))
 	}
 }
-
-func TestEExt(t *testing.T) {
-	if false {
-		EExt(errors.New("123"), -1)
-	}
-}

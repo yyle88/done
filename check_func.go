@@ -1,9 +1,6 @@
 package done
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/yyle88/zaplog"
 	"go.uber.org/zap"
 )
@@ -34,15 +31,5 @@ func Soft(err error) {
 func Fata(err error) {
 	if err != nil {
 		zaplog.LOGS.P1.Fatal("ERROR", zap.Error(err))
-	}
-}
-
-// EExt 逻辑相当于 if err != nil { os.Exit(code) } 也是出错时打印红色错误信息，接着退出系统
-func EExt(err error, code int) {
-	if err != nil {
-		var msg = fmt.Sprintf("\x1b[31;1m%s\x1b[0m", err) //红色打印
-		fmt.Println(msg)
-		zaplog.LOGS.P1.Error("ERROR", zap.Error(err))
-		os.Exit(code)
 	}
 }
