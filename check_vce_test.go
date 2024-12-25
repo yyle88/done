@@ -5,21 +5,21 @@ import (
 )
 
 func TestVE(t *testing.T) {
-	ve := VCE(newExample2x())
+	ve := VCE(newExample())
 	t.Log(ve.V)
 }
 
 func TestVe_Done(t *testing.T) {
-	example := VCE(newExample2x()).Done()
+	example := VCE(newExample()).Done()
 	t.Log(example.S)
 }
 
 func TestVe_Good(t *testing.T) {
-	VCE(newExample2x()).Good()
+	VCE(newExample()).Good()
 }
 
 func TestVe_Nice(t *testing.T) {
-	example := VCE(newExample2x()).Nice()
+	example := VCE(newExample()).Nice()
 	t.Log(example.S)
 }
 

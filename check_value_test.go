@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+	"github.com/yyle88/done/internal/tests"
 )
 
 func TestGood(t *testing.T) {
@@ -27,6 +28,24 @@ type Example struct {
 	S string
 }
 
-func newExample2x() (*Example, error) {
+func newExample() (*Example, error) {
 	return &Example{S: "xyz"}, nil
+}
+
+func TestNull(t *testing.T) {
+	var example *Example
+	Null(example)
+
+	tests.ExpectPanic(t, func() {
+		Null(&Example{S: "abc"})
+	})
+}
+
+func TestFull(t *testing.T) {
+	Full(&Example{S: "abc"})
+
+	tests.ExpectPanic(t, func() {
+		var example *Example
+		Full(example)
+	})
 }

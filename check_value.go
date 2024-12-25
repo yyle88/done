@@ -60,13 +60,13 @@ func None[V comparable](v V) {
 	}
 }
 
-func Null[V *any](v any) {
+func Null[T any](v *T) {
 	if v != nil {
 		panic(errors.New("SHOULD BE NULL BUT IS FULL"))
 	}
 }
 
-func Full[V *any](v any) {
+func Full[T any](v *T) {
 	if v == nil {
 		panic(errors.New("SHOULD BE FULL BUT IS NULL"))
 	}
