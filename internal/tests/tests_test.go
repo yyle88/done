@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-	"github.com/yyle88/must/internal/tests"
+	"github.com/yyle88/done/internal/tests"
 )
 
 func TestExpectPanic(t *testing.T) {
