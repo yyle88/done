@@ -23,24 +23,24 @@ func VSE(val string, err error) *Vse {
 
 func (a *Vse) Equals(s string) {
 	if v := a.Done(); v != s {
-		zaplog.LOGS.P1.Panic("wrong", zap.String("v", v), zap.String("s", s))
+		zaplog.LOGS.Skip1.Panic("wrong", zap.String("v", v), zap.String("s", s))
 	}
 }
 
 func (a *Vse) HasPrefix(prefix string) {
 	if v := a.Done(); !strings.HasPrefix(v, prefix) {
-		zaplog.LOGS.P1.Panic("wrong", zap.String("v", v), zap.String("prefix", prefix))
+		zaplog.LOGS.Skip1.Panic("wrong", zap.String("v", v), zap.String("prefix", prefix))
 	}
 }
 
 func (a *Vse) HasSuffix(suffix string) {
 	if v := a.Done(); !strings.HasSuffix(v, suffix) {
-		zaplog.LOGS.P1.Panic("wrong", zap.String("v", v), zap.String("suffix", suffix))
+		zaplog.LOGS.Skip1.Panic("wrong", zap.String("v", v), zap.String("suffix", suffix))
 	}
 }
 
 func (a *Vse) Contains(sub string) {
 	if v := a.Done(); !strings.Contains(v, sub) {
-		zaplog.LOGS.P1.Panic("wrong", zap.String("v", v), zap.String("sub", sub))
+		zaplog.LOGS.Skip1.Panic("wrong", zap.String("v", v), zap.String("sub", sub))
 	}
 }
