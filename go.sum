@@ -14,8 +14,8 @@ github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOf
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/yyle88/mutexmap v1.0.10 h1:PIsx9KTdK6h1yH5NzBrPl21RrZ/XsE4IbgulMlhJzZE=
 github.com/yyle88/mutexmap v1.0.10/go.mod h1:QUYDuARLPlGj414kHewQ5tt8jkDxQXoai8H3C4Gg+yc=
-github.com/yyle88/zaplog v0.0.19 h1:O4g7EO+uks7DkXbBXAje0LRvrBbkPuMD4gphuXw9jAo=
-github.com/yyle88/zaplog v0.0.19/go.mod h1:jN9/2IXYlpHOgoIyOTid1EPlUyGBWzFjr0dX9YKLkC0=
+github.com/yyle88/zaplog v0.0.20 h1:ByVj51j2C9p5tWw8wbIdmdrMK5IS6VECh/U746t321E=
+github.com/yyle88/zaplog v0.0.20/go.mod h1:jN9/2IXYlpHOgoIyOTid1EPlUyGBWzFjr0dX9YKLkC0=
 go.uber.org/goleak v1.3.0 h1:2K3zAYmnTNqV73imy9J1T3WC+gmCePx2hEGkimedGto=
 go.uber.org/goleak v1.3.0/go.mod h1:CoHD4mav9JJNrW/WLlf7HGZPjdw8EucARQHekz1X6bE=
 go.uber.org/multierr v1.11.0 h1:blXXJkSxSSfBVBlC76pxqeO+LN3aDfLQo+309xJstO0=
