@@ -9,10 +9,10 @@ import (
 func ExpectPanic(t *testing.T, run func()) {
 	defer func() {
 		if recoverFrom := recover(); recoverFrom != nil {
-			t.Logf("expect panic then catch panic [%v] -> [success]", recoverFrom)
+			t.Logf("expect panic then catch panic [%v] -> [SUCCESS]", recoverFrom)
 			return
 		}
-		require.Fail(t, "expect panic while not panic -> [failure]")
+		require.Fail(t, "expect panic while not panic -> [FAILURE]")
 	}()
 
 	run()
