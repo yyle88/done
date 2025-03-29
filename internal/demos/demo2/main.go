@@ -36,7 +36,7 @@ func ManualErrorHandling() int64 {
 	if err != nil {
 		panic(err)
 	}
-	if !(num > 0) {
+	if num <= 0 {
 		panic(errors.New("num is not > 0"))
 	}
 	return num
