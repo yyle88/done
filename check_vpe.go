@@ -47,6 +47,6 @@ func (a *Vpe[V]) Null() {
 	Null(a.Done())
 }
 
-func (a *Vpe[V]) Full() {
-	Full(a.Done())
+func (a *Vpe[V]) Full() *V {
+	return Full(a.Done())
 }

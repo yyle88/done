@@ -35,3 +35,14 @@ func TestVpe_None(t *testing.T) {
 	}
 	VPE(run()).None()
 }
+
+func TestVpe_Full(t *testing.T) {
+	type exampleType struct {
+		Value int64
+	}
+	run := func() (*exampleType, error) {
+		return &exampleType{Value: 666}, nil
+	}
+	res := VPE(run()).Full()
+	require.Equal(t, int64(666), res.Value)
+}

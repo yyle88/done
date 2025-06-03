@@ -66,8 +66,9 @@ func Null[T any](v *T) {
 	}
 }
 
-func Full[T any](v *T) {
+func Full[T any](v *T) *T {
 	if v == nil {
 		panic(errors.New("SHOULD BE FULL BUT IS NULL"))
 	}
+	return v
 }
