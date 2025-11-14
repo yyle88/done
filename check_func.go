@@ -1,3 +1,12 @@
+// Package done: Simple error handling package with panic-based validation
+// Auto panics on errors to simplify error checking patterns in Go code
+// Supports validation functions that reduce boilerplate error handling
+// Provides type-safe validation methods with inline assertions
+//
+// done: Go 错误处理简化包，基于 panic 的验证机制
+// 错误时自动 panic，简化 Go 代码中的错误检查模式
+// 支持验证函数，减少样板错误处理代码
+// 提供类型安全的验证方法和内联断言
 package done
 
 import (
